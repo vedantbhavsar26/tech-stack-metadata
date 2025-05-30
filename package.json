@@ -24,9 +24,9 @@
     "url": "https://github.com/vedantbhavsar26/tech-stack-metadata.git"
   },
   "bugs": {
-    "url": "https://github.com/exlaso/tech-stack-metadata/issues"
+    "url": "https://github.com/vedantbhavsar26/tech-stack-metadata/issues"
   },
-  "homepage": "https://github.com/exlaso/tech-stack-metadata#readme",
+  "homepage": "https://tech-stack-metadata.vedantbhavsar.com",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
