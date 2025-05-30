@@ -1,61 +1,25 @@
 {
-  "name": "@exlaso/tech-stack-metadata",
-  "version": "1.0.3",
-  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808",
-  "description": "Categorized tech stack metadata with react-icons for use in portfolio or dashboard projects.",
-  "author": "Vedant bhavsar <vedantbhavsar67@gmail.com> (www.vedantbhavsar.com)",
-  "license": "MIT",
-  "keywords": [
-    "react-icons",
-    "tech stack",
-    "typescript",
-    "icon library",
-    "metadata",
-    "portfolio"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vedantbhavsar26/tech-stack-metadata.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vedantbhavsar26/tech-stack-metadata/issues"
-  },
-  "homepage": "https://tech-stack-metadata.vedantbhavsar.com",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "name": "tech-stack-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.7.1",
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "prepare": "npm run build",
-    "clean": "rm -rf dist",
-    "lint": "eslint"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
+    "prepare": "pnpm build"
   },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "dependencies": {
-    "@antfu/eslint-config": "^4.13.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-icons": "^5.5.0"
+    "turbo": "^2.5.3"
   },
   "devDependencies": {
-    "@eslint-react/eslint-plugin": "^1.50.0",
-    "@eslint/js": "^9.27.0",
-    "@types/node": "^22.15.27",
+    "@antfu/eslint-config": "^4.13.2",
     "eslint": "^9.27.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.2.0",
-    "tsup": "^8.5.0",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.33.0"
+    "typescript": "^5.8.3"
   }
 }
