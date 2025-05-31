@@ -72,7 +72,7 @@ export default function HomePage() {
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg h-14"
                 asChild
               >
-                <Link href="/docs">
+                <Link href="/docs/introduction">
                   <Download className="h-5 w-5 mr-2" />
                   Get Started
                 </Link>
@@ -587,7 +587,7 @@ export function ProjectTechStack({ projectId }) {
                 className="text-lg h-14 font-medium"
                 asChild
               >
-                <Link href="/docs">
+                <Link href="/docs/introduction">
                   <Book className="h-5 w-5 mr-2" />
                   Read Documentation
                 </Link>
@@ -638,7 +638,7 @@ export function ProjectTechStack({ projectId }) {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/docs"
+                    href="/docs/introduction"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Documentation

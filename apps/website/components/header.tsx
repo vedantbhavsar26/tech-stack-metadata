@@ -1,4 +1,5 @@
-import { Github, Package } from "lucide-react";
+import { Github } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 
@@ -10,9 +11,9 @@ export function Header() {
           <div className="flex items-center space-x-3">
             <Link href="/" className="flex items-center space-x-3">
               <div
-                className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center"
+                className=" rounded-md  flex items-center justify-center"
               >
-                <Package className="h-5 w-5 text-white" />
+                <Image src="/icon.png" alt="tech-stack-metadata logo" width={50} height={50} className="rounded-2xl" />
               </div>
               <div>
                 <h1 className="text-xl font-bold  capitalize">Tech-stack-metadata</h1>
@@ -33,7 +34,7 @@ export function Header() {
                 </li>
                 <li>
                   <Link
-                    href="/docs"
+                    href="/docs/introduction"
                     className="text-sm font-medium hover:text-blue-600 transition-colors"
                   >
                     Documentation
