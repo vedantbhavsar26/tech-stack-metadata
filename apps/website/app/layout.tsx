@@ -29,9 +29,9 @@ export const metadata = {
     description: "A reusable and categorized metadata structure for tech stacks with React Icons integration - perfect for portfolios, dashboards, and developer showcases.",
     images: [
       {
-        url: "https://tech-stack-metadata.vedantbhavsar.com/og-image.png",
+        url: "/opengraph-image.png",
         width: 1200,
-        height: 630,
+        height: 600,
         alt: "Tech Stack Metadata - Showcase your technology expertise",
       },
     ],
@@ -43,7 +43,7 @@ export const metadata = {
     title: "Tech Stack Metadata | Developer Portfolio Technology Showcase",
     description: "A reusable and categorized metadata structure for tech stacks with React Icons integration",
     creator: "@vedantbhavsar26",
-    images: ["https://tech-stack-metadata.vedantbhavsar.com/og-image.png"],
+    images: ["/opengraph-image.png"],
   },
 
   // Apple specific
