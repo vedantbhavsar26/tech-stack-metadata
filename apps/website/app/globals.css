@@ -120,3 +120,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.shiki {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 1rem;
+}
+
+/* SMooth scroll */
+html {
+  scroll-behavior: smooth;
+}

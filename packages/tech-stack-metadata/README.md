@@ -1,14 +1,14 @@
 # @exlaso/tech-stack-metadata
 
-A reusable and categorized metadata structure for tech stacks, including React Icons — perfect for portfolios, developer dashboards, and resume sites.
+A reusable, categorized, and fully-typed metadata structure for tech stacks, including React Icons. Ideal for portfolios, dashboards, and resume sites.
 
 ---
 
 ## 🚀 Features
 
-- Categorized technology metadata
-- Includes popular tools and frameworks across stacks
+- Categorized technology metadata (languages, frontend, backend, databases, APIs, auth, devops, security, tools)
 - Pre-mapped with `react-icons` for UI rendering
+- Utility functions for searching and filtering metadata
 - Fully typed (TypeScript support)
 - Lightweight and easy to extend
 
@@ -28,40 +28,57 @@ yarn add @exlaso/tech-stack-metadata
 
 ## 🧩 Usage
 
-```tsx
-import { techCategories } from "@exlaso/tech-stack-metadata";
+### Importing Metadata
 
-techCategories.forEach((category) => {
-  console.log(category.label); // e.g., 'Frontend', 'Backend'
-  category.items.forEach((item) => {
-    console.log(item.name); // e.g., 'React'
-    console.log(item.icon); // React component from react-icons
-  });
-});
+```ts
+import { techMetaData } from "@exlaso/tech-stack-metadata";
+
+// Access all categories
+console.log(techMetaData.frontend);
+console.log(techMetaData.languages);
+
+// Access all tech metadata as a flat object
+console.log(techMetaData.all);
+```
+
+### Importing Categories Directly
+
+```ts
+import { backend, databases, frontend } from "@exlaso/tech-stack-metadata";
+```
+
+### Using Utility Functions
+
+```ts
+import { getAllTechMetadata, getTechMetadata, getTechMetadataByCategory, searchTechMetadata } from "@exlaso/tech-stack-metadata";
+
+// Example: Search for a tech by name
+const results = searchTechMetadata("React");
+```
+
+### Types
+
+```ts
+import type { TechMetaData, TechMetaDataKey } from "@exlaso/tech-stack-metadata";
+import { IconType } from "@exlaso/tech-stack-metadata";
 ```
 
 ---
 
 ## 📁 Structure
 
-Each tech item includes:
+Each tech item:
 
 ```ts
-type TechItem = {
+type TechMetaData = {
   name: string;
   icon: IconType; // from react-icons
-  url?: string; // optional
+  url?: string;
+  // ...other fields
 };
 ```
 
-Each category includes:
-
-```ts
-type TechCategory = {
-  label: string;
-  items: TechItem[];
-};
-```
+All categories are available as named exports and under `techMetaData`.
 
 ---
 

@@ -1,39 +1,38 @@
-"use client"
+"use client";
 
-import type React from "react"
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import type React from "react";
+import { useState } from "react";
+import { toast } from "sonner";
 
-import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "sonner"
-
-interface AddTechModalProps {
-  isOpen: boolean
-  onClose: () => void
-  categories: string[]
-}
+type AddTechModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  categories: string[];
+};
 
 export function AddTechModal({ isOpen, onClose, categories }: AddTechModalProps) {
-  const [name, setName] = useState("")
-  const [category, setCategory] = useState("")
-  const [icon, setIcon] = useState("")
-  const [description, setDescription] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [icon, setIcon] = useState("");
+  const [description, setDescription] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Validate form
     if (!name || !category || !icon) {
-      toast.error("Please fill in all required fields")
-      return
+      toast.error("Please fill in all required fields");
+      return;
     }
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     // Simulate API call
     setTimeout(() => {
@@ -43,21 +42,21 @@ export function AddTechModal({ isOpen, onClose, categories }: AddTechModalProps)
         category,
         icon,
         description,
-      })
+      });
 
-      toast.success(`${name} has been added to the ${category} category`)
+      toast.success(`${name} has been added to the ${category} category`);
 
       // Reset form
-      setName("")
-      setCategory("")
-      setIcon("")
-      setDescription("")
-      setIsSubmitting(false)
+      setName("");
+      setCategory("");
+      setIcon("");
+      setDescription("");
+      setIsSubmitting(false);
 
       // Close modal
-      onClose()
-    }, 1000)
-  }
+      onClose();
+    }, 1000);
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -69,12 +68,14 @@ export function AddTechModal({ isOpen, onClose, categories }: AddTechModalProps)
         <form onSubmit={handleSubmit} className="space-y-6 py-4">
           <div className="space-y-2">
             <Label htmlFor="name">
-              Name <span className="text-red-500">*</span>
+              Name
+              {" "}
+              <span className="text-red-500">*</span>
             </Label>
             <Input
               id="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
               placeholder="e.g., React, Node.js, MongoDB"
               required
             />
@@ -82,14 +83,16 @@ export function AddTechModal({ isOpen, onClose, categories }: AddTechModalProps)
 
           <div className="space-y-2">
             <Label htmlFor="category">
-              Category <span className="text-red-500">*</span>
+              Category
+              {" "}
+              <span className="text-red-500">*</span>
             </Label>
             <Select value={category} onValueChange={setCategory} required>
               <SelectTrigger id="category">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent>
-                {categories.map((cat) => (
+                {categories.map(cat => (
                   <SelectItem key={cat} value={cat}>
                     {cat}
                   </SelectItem>
@@ -100,12 +103,14 @@ export function AddTechModal({ isOpen, onClose, categories }: AddTechModalProps)
 
           <div className="space-y-2">
             <Label htmlFor="icon">
-              Icon <span className="text-red-500">*</span>
+              Icon
+              {" "}
+              <span className="text-red-500">*</span>
             </Label>
             <Input
               id="icon"
               value={icon}
-              onChange={(e) => setIcon(e.target.value)}
+              onChange={e => setIcon(e.target.value)}
               placeholder="e.g., ⚛️, 🐍, 🔥 (emoji or icon reference)"
               required
             />
@@ -117,7 +122,7 @@ export function AddTechModal({ isOpen, onClose, categories }: AddTechModalProps)
             <Textarea
               id="description"
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={e => setDescription(e.target.value)}
               placeholder="Brief description of the technology"
               rows={3}
             />
@@ -138,5 +143,5 @@ export function AddTechModal({ isOpen, onClose, categories }: AddTechModalProps)
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
