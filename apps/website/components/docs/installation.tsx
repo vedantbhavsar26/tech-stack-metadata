@@ -1,5 +1,5 @@
 import { Section } from "@/components/section";
-import { Shiki } from "@/components/ui/shiki";
+import { CodeHighlighter } from "@/components/ui/codeHighlighter";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { FunctionComponent } from "react";
 import React from "react";
@@ -26,13 +26,13 @@ export const Installation: FunctionComponent = () => {
               <TabsTrigger value="yarn" className="px-3 py-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md">yarn</TabsTrigger>
             </TabsList>
             <TabsContent value="npm">
-              <Shiki code="npm install @exlaso/tech-stack-metadata" lang="bash" />
+              <CodeHighlighter code="npm install @exlaso/tech-stack-metadata" lang="bash" />
             </TabsContent>
             <TabsContent value="pnpm">
-              <Shiki code="pnpm install @exlaso/tech-stack-metadata" lang="bash" />
+              <CodeHighlighter code="pnpm install @exlaso/tech-stack-metadata" lang="bash" />
             </TabsContent>
             <TabsContent value="yarn">
-              <Shiki code="yarn add @exlaso/tech-stack-metadata" lang="bash" />
+              <CodeHighlighter code="yarn add @exlaso/tech-stack-metadata" lang="bash" />
             </TabsContent>
           </Tabs>
         </div>
@@ -68,7 +68,7 @@ export const Installation: FunctionComponent = () => {
         <p className="mb-6">
           After installation, you can verify it's working correctly by importing it in your project:
         </p>
-        <Shiki
+        <CodeHighlighter
           code={`import { techCategories } from "@exlaso/tech-stack-metadata";
 
 // Log available tech categories

@@ -3,6 +3,7 @@ import { inter } from "@/components/fonts";
 import "./globals.css";
 
 import { Header } from "@/components/header";
+import { cn } from "@/lib/utils";
 import Script from "next/script";
 import type React from "react";
 import { Toaster } from "sonner";
@@ -42,7 +43,7 @@ export const metadata = {
     title: "Tech Stack Metadata | Developer Portfolio Technology Showcase",
     description: "A reusable and categorized metadata structure for tech stacks with React Icons integration",
     creator: "@vedantbhavsar26",
-    images: ["https://tech-stack-metadata.vedantbhavsar.com/twitter-image.png"],
+    images: ["https://tech-stack-metadata.vedantbhavsar.com/og-image.png"],
   },
 
   // Apple specific
@@ -82,7 +83,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn(inter.className)}>
         <Header />
         {children}
         <Toaster position="top-center" />

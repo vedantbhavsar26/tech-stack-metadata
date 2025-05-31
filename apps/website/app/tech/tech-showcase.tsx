@@ -1,10 +1,8 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { TechCards } from "@/components/tech-cards";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
 import type { CategoryKey, IconType, TechMetaData } from "@exlaso/tech-stack-metadata";
 import { categories, getTechMetadataByCategory } from "@exlaso/tech-stack-metadata";
 import { motion } from "framer-motion";
@@ -12,13 +10,13 @@ import { Package, Search, X } from "lucide-react";
 import type React from "react";
 import { useEffect, useState } from "react";
 
-const TechData: TechMeta[] = Object.entries(categories).map(([category, categoryData]) => ({
+const TechData: TechMetaByCategory[] = Object.entries(categories).map(([category, categoryData]) => ({
   label: category,
   icon: categoryData.icon,
   items: getTechMetadataByCategory(category as CategoryKey, true),
 })).filter(e => e.items.length > 0);
 
-type TechMeta = {
+type TechMetaByCategory = {
   label: string;
   icon: IconType;
   items: TechMetaData[];
@@ -31,7 +29,7 @@ const fadeIn = {
 
 export function TechShowcase() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredCategories, setFilteredCategories] = useState<TechMeta[]>(TechData);
+  const [filteredCategories, setFilteredCategories] = useState<TechMetaByCategory[]>(TechData);
   const [activeTab, setActiveTab] = useState("all");
   const [isFiltering, setIsFiltering] = useState(false);
 
@@ -66,25 +64,11 @@ export function TechShowcase() {
   }, [searchQuery]);
 
   // Get all tech items across all categories with unique identifiers
-  const allTechItems = TechData.flatMap(category =>
-    category.items.map(item => ({
+  const filteredAllTechItems = filteredCategories.flatMap(category => category.items)
+    .map((item, index) => ({
       ...item,
-      category: category.label,
-      id: `${category.label}-${item.name}`, // Add unique ID to prevent duplicates
-    })),
-  );
-
-  // Filter all tech items based on search query and ensure uniqueness
-  const filteredAllTechItems = searchQuery.trim()
-    ? [...new Map(allTechItems
-        .filter(item =>
-          item.name.toLowerCase().includes(searchQuery.toLowerCase())
-          || (item.aliases && item.aliases.length > 0
-            && item.aliases.some(alias => alias.toLowerCase().includes(searchQuery.toLowerCase()))),
-        )
-        .map(item => [item.id, item]))
-        .values()]
-    : allTechItems;
+      key: `${item.name}-${index}`, // Unique key for each item
+    }));
 
   // Check if search has no results
   const hasNoResults = filteredCategories.length === 0 || (
@@ -188,41 +172,10 @@ export function TechShowcase() {
                     initial="hidden"
                     animate="show"
                     variants={fadeIn}
-                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                    className="grid grid-cols-4 gap-4"
                   >
                     {filteredAllTechItems.map((item, index) => (
-                      <motion.div
-                        key={item.id || `${item.name}-${index}`}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2, delay: Math.min(index * 0.05, 1) }}
-                      >
-                        <Card className="overflow-hidden hover:shadow-md transition-all border-muted/50 h-full">
-                          <CardContent className="p-4 flex flex-col h-full">
-                            <div className="flex items-center gap-3">
-                              <div
-                                className={cn(
-                                  "flex-shrink-0 h-12 w-12 rounded-md flex items-center justify-center text-2xl",
-                                  "bg-slate-100 dark:bg-slate-800",
-                                )}
-                              >
-                                {item?.icon({})}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h3 className="font-medium truncate" title={item.name}>{item.name}</h3>
-                                <Badge variant="outline" className="mt-1 capitalize">
-                                  {item.category}
-                                </Badge>
-                              </div>
-                            </div>
-                            {item.aliases && item.aliases.length > 0 && (
-                              <p className="text-sm text-muted-foreground mt-3 line-clamp-2">
-                                {item.aliases.join(", ")}
-                              </p>
-                            )}
-                          </CardContent>
-                        </Card>
-                      </motion.div>
+                      <TechCards item={item} index={index} key={item.key} />
                     ))}
                   </motion.div>
                 )}
@@ -268,41 +221,13 @@ export function TechShowcase() {
                       initial="hidden"
                       animate="show"
                       variants={fadeIn}
-                      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                      className="grid grid-cols-4 gap-4"
                     >
                       {filteredCategories
                         .find(c => c.label === category.label)
                         ?.items
                         .map((item, index) => (
-                          <motion.div
-                            key={`${item.name}-${index}`}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.2, delay: index * 0.05 }}
-                          >
-                            <Card className="overflow-hidden hover:shadow-md transition-all border-muted/50 h-full">
-                              <CardContent className="p-4 flex flex-col h-full">
-                                <div className="flex items-center gap-3">
-                                  <div
-                                    className={cn(
-                                      "flex-shrink-0 h-12 w-12 rounded-md flex items-center justify-center text-2xl",
-                                      "bg-slate-100 dark:bg-slate-800",
-                                    )}
-                                  >
-                                    {item.icon({})}
-                                  </div>
-                                  <div className="flex-1 min-w-0">
-                                    <h3 className="font-medium truncate" title={item.name}>{item.name}</h3>
-                                  </div>
-                                </div>
-                                {item.aliases && item.aliases.length > 0 && (
-                                  <p className="text-sm text-muted-foreground mt-3 line-clamp-2">
-                                    {item.aliases.join(", ")}
-                                  </p>
-                                )}
-                              </CardContent>
-                            </Card>
-                          </motion.div>
+                          <TechCards item={item} index={index} key={item.key} />
                         ))}
                     </motion.div>
                   )}

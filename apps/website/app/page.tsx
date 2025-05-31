@@ -4,12 +4,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shiki } from "@/components/ui/shiki";
+import { CodeHighlighter } from "@/components/ui/codeHighlighter";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { getAllTechMetaData, getTechMetaData } from "@exlaso/tech-stack-metadata";
 import { Code, Download, FileCode, Github, Globe, Layout, Package, Settings, Shield, Star, Terminal } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import type React from "react";
 
 export default function HomePage() {
   const tech = getAllTechMetaData();
@@ -19,7 +21,7 @@ export default function HomePage() {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800"
+      className="min-h-screen bg-gradient-to-br  px-4  md:px-0 from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800"
     >
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
@@ -35,10 +37,10 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="container relative z-10 mx-auto px-4 text-center">
+        <div className="container relative z-10 mx-auto  text-center">
           <Badge
             variant="outline"
-            className="mb-6 px-4 py-1 text-sm font-medium border-blue-200 dark:border-blue-800 bg-blue-100/50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300"
+            className="mb-6  py-1 text-sm font-medium border-blue-200 dark:border-blue-800 bg-blue-100/50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300"
           >
             v
             {VERSION}
@@ -112,8 +114,26 @@ export default function HomePage() {
                 <div className="h-2 w-2 rounded-full bg-green-500"></div>
                 <div className="ml-2 text-xs text-slate-500">Tech Stack Showcase</div>
               </div>
-              <div className="max-h-[400px] overflow-y-auto p-2">
-                <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 p-2">
+              <div className="min-h-[400px] overflow-y-auto p-2">
+                <div className="md:hidden  grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 p-2">
+                  {/* Just showing a few example tech icons for preview */}
+                  {tech.slice(0, 8).map((techMeta, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center justify-center gap-2 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+                    >
+                      <div
+                        className="h-12 w-12 rounded-md bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center "
+                      >
+                        {techMeta.icon({ className: "h-4 w-4" })}
+                      </div>
+                      <span className="text-xs font-medium text-center truncate w-full">
+                        {techMeta.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="max-md:hidden grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 p-2">
                   {/* Just showing a few example tech icons for preview */}
                   {tech.slice(0, 18).map((techMeta, i) => (
                     <div
@@ -162,7 +182,7 @@ export default function HomePage() {
 
       {/* Features Section */}
       <section className="py-24 bg-white dark:bg-slate-900">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto ">
           <div className="text-center mb-16">
             <Badge
               variant="outline"
@@ -317,9 +337,9 @@ export default function HomePage() {
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="space-y-4">
-                      <Shiki lang="bash" code="npm install @exlaso/tech-stack-metadata" />
-                      <Shiki lang="bash" code="pnpm add @exlaso/tech-stack-metadata" />
-                      <Shiki lang="bash" code="yarn add @exlaso/tech-stack-metadata" />
+                      <CodeHighlighter lang="bash" code="npm install @exlaso/tech-stack-metadata" />
+                      <CodeHighlighter lang="bash" code="pnpm add @exlaso/tech-stack-metadata" />
+                      <CodeHighlighter lang="bash" code="yarn add @exlaso/tech-stack-metadata" />
                     </div>
                   </CardContent>
                 </Card>
@@ -338,7 +358,7 @@ export default function HomePage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Shiki
+                    <CodeHighlighter
                       lang="tsx"
                       code={`import { techMetaData } from "@exlaso/tech-stack-metadata";
 import { frontend, backend } from "@exlaso/tech-stack-metadata";
@@ -371,7 +391,7 @@ console.log(backend);`}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Shiki
+                    <CodeHighlighter
                       lang="tsx"
                       code={`import { 
   getAllTechMetadata, 
@@ -423,8 +443,8 @@ const searchResults = searchTechMetadata("react");`}
                 Create reusable components to display tech stacks in your applications.
               </p>
               <Card className="mb-6">
-                <CardContent className="pt-6">
-                  <Shiki
+                <CardContent className="pt-6 overflow-x-scroll">
+                  <CodeHighlighter
                     lang="tsx"
                     code={`import React from "react";
 import { frontend, backend, databases } from "@exlaso/tech-stack-metadata";
@@ -621,9 +641,9 @@ export function ProjectTechStack({ projectId }) {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <div
-                  className="h-8 w-8 rounded bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center"
+                  className=" rounded-md  flex items-center justify-center"
                 >
-                  <Package className="h-5 w-5 text-white" />
+                  <Image src="/icon.png" alt="tech-stack-metadata logo" width={50} height={50} className="rounded-2xl" />
                 </div>
                 <span className="font-bold text-lg">tech-stack-metadata</span>
               </div>
@@ -653,7 +673,7 @@ export function ProjectTechStack({ projectId }) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tech" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/usage#tech-metadata" className="text-muted-foreground hover:text-foreground">
                     Tech
                     Categories
                   </Link>
@@ -690,41 +710,32 @@ export function ProjectTechStack({ projectId }) {
                     Twitter
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="https://discord.gg/tech-metadata"
-                    target="_blank"
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    Discord
-                  </Link>
-                </li>
               </ul>
             </div>
 
-            <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
-                    Privacy
-                    Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="text-muted-foreground hover:text-foreground">
-                    Terms of
-                    Service
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/license" className="text-muted-foreground hover:text-foreground">
-                    MIT
-                    License
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            {/* <div> */}
+            {/*  <h3 className="font-semibold mb-4">Legal</h3> */}
+            {/*  <ul className="space-y-2"> */}
+            {/*    <li> */}
+            {/*      <Link href="/privacy" className="text-muted-foreground hover:text-foreground"> */}
+            {/*        Privacy */}
+            {/*        Policy */}
+            {/*      </Link> */}
+            {/*    </li> */}
+            {/*    <li> */}
+            {/*      <Link href="/terms" className="text-muted-foreground hover:text-foreground"> */}
+            {/*        Terms of */}
+            {/*        Service */}
+            {/*      </Link> */}
+            {/*    </li> */}
+            {/*    <li> */}
+            {/*      <Link href="/license" className="text-muted-foreground hover:text-foreground"> */}
+            {/*        MIT */}
+            {/*        License */}
+            {/*      </Link> */}
+            {/*    </li> */}
+            {/*  </ul> */}
+            {/* </div> */}
           </div>
 
           <div

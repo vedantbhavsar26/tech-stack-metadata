@@ -1,5 +1,5 @@
 import { Section } from "@/components/section";
-import { Shiki } from "@/components/ui/shiki";
+import { CodeHighlighter } from "@/components/ui/codeHighlighter";
 import type { FunctionComponent } from "react";
 import React from "react";
 
@@ -57,7 +57,7 @@ export const Introduction: FunctionComponent = () => {
         </p>
 
         <div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-md mb-6 overflow-auto">
-          <Shiki
+          <CodeHighlighter
             code={`// Example tech item structure
 {
   name: "React",

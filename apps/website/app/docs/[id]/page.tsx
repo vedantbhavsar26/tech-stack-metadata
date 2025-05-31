@@ -1,6 +1,5 @@
-import { SidebarItem } from "@/components/SidebarItem";
+import { Sidebar } from "@/components/sidebar";
 import { sidebarContent } from "@/lib/data/sidebar";
-import { omit } from "@/lib/omit";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { FunctionComponent } from "react";
@@ -76,23 +75,11 @@ const Page: FunctionComponent<typesforPage> = async (props) => {
     return notFound();
 
   return (
-    <main className="relative mx-auto flex gap-8">
-      <nav className="bg-primary/5 max-w-sm" aria-label="Documentation sidebar">
-        <aside className="sticky top-0 rounded-sm p-8">
-          <ul className="">
-            {sidebarContent.map((item, index) => (
-              <SidebarItem
-                {...omit(item, ["component"])}
-                key={item.title}
-                isRoot
-                activeId={id}
-                index={index}
-              />
-            ))}
-          </ul>
-        </aside>
-      </nav>
-      <sidebar.component />
+    <main className="relative mx-auto flex flex-col max-md:container md:flex-row gap-8">
+      <Sidebar id={id} />
+      <div className="px-4  md:px-0">
+        <sidebar.component />
+      </div>
     </main>
   );
 };

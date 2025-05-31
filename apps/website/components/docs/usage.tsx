@@ -1,6 +1,6 @@
 import { TechShowcase } from "@/app/tech/tech-showcase";
 import { Section } from "@/components/section";
-import { Shiki } from "@/components/ui/shiki";
+import { CodeHighlighter } from "@/components/ui/codeHighlighter";
 import React from "react";
 
 export function Usage() {
@@ -17,7 +17,7 @@ export function Usage() {
           object to access all categorized tech metadata, or import
           categories and utilities directly as needed.
         </p>
-        <Shiki
+        <CodeHighlighter
           lang="ts"
           code={`import { techMetaData } from "@exlaso/tech-stack-metadata";
 
@@ -32,7 +32,7 @@ console.log(techMetaData.all);
         />
 
         <h2 className="text-2xl font-semibold mb-4">Importing Categories Directly</h2>
-        <Shiki
+        <CodeHighlighter
           lang="ts"
           code={`import { frontend, backend, databases } from "@exlaso/tech-stack-metadata";
 
@@ -46,7 +46,7 @@ console.log(frontend);
         <p>
           The following utility functions are available for searching and filtering tech metadata:
         </p>
-        <Shiki
+        <CodeHighlighter
           lang="ts"
           code={`import {
   getAllTechMetadata,
@@ -74,7 +74,7 @@ const results = searchTechMetadata("React");
         <p>
           All metadata is fully typed. You can import types for strict TypeScript support:
         </p>
-        <Shiki
+        <CodeHighlighter
           lang="ts"
           code={`import type { TechMetaData, TechMetaDataKey } from "@exlaso/tech-stack-metadata";
 import { IconType } from "@exlaso/tech-stack-metadata";

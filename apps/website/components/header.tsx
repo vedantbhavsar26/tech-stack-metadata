@@ -15,8 +15,8 @@ export function Header() {
               >
                 <Image src="/icon.png" alt="tech-stack-metadata logo" width={50} height={50} className="rounded-2xl" />
               </div>
-              <div>
-                <h1 className="text-xl font-bold  capitalize">Tech-stack-metadata</h1>
+              <div className="max-md:hidden ">
+                <h3 className="text-xl font-bold  capitalize">Tech-stack-metadata</h3>
                 <p className="text-sm text-muted-foreground">@exlaso/tech-stack-metadata</p>
               </div>
             </Link>
