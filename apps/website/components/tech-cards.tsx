@@ -14,6 +14,7 @@ export const TechCards: React.FC<{
       key={`${item.name}-${index}`}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
+      ex={2}
       transition={{ duration: 0.2, delay: Math.min(index * 0.05, 1) }}
     >
       <Card className="overflow-hidden hover:shadow-md transition-all border-muted/50 h-full">
