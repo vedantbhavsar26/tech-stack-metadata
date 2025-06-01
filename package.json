@@ -11,6 +11,16 @@
     "clean": "turbo run clean",
     "prepare": "husky install"
   },
+  "dependencies": {
+    "turbo": "^2.5.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.13.2",
+    "eslint": "^9.27.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.0",
+    "typescript": "^5.8.3"
+  },
   "lint-staged": {
     "*.{js,ts,tsx,jsx,json}": [
       "eslint --fix"
@@ -19,13 +29,5 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {
-    "turbo": "^2.5.3"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^4.13.2",
-    "eslint": "^9.27.0",
-    "typescript": "^5.8.3"
-  }
+  ]
 }
