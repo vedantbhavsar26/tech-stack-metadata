@@ -8,8 +8,8 @@
       "cache": false
     },
     "lint": {
-        "dependsOn": ["^lint"],
-        "outputs": []
+      "dependsOn": ["^lint"],
+      "outputs": []
     },
     "lint:fix": {
       "dependsOn": ["^lint:fix"],

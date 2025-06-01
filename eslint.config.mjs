@@ -12,7 +12,7 @@ export default antfu({
     quotes: "double",
   },
 }, {
-  
+
   rules: {
 
     "@typescript-eslint/no-redeclare": "off",
