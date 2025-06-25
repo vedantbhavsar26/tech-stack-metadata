@@ -673,7 +673,7 @@ export function ProjectTechStack({ projectId }) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/usage#tech-metadata" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/docs/usage#tech-metadata" className="text-muted-foreground hover:text-foreground">
                     Tech
                     Categories
                   </Link>
